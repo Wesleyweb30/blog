@@ -1,7 +1,14 @@
-import {createBrowserRouter,RouterProvider} from "react-router-dom";
+import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import HomePage from "./page/home";
 import AboutPage from "./page/about";
+import {
+  QueryClient,QueryClientProvider} from '@tanstack/react-query'
 
+
+/**Rotas 
+ * 
+ * 
+ */
 const router = createBrowserRouter([
   {
     path: "/",
@@ -13,10 +20,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+
+const queryClient = new QueryClient()
+
 export default function App() {
   return (
     <>
-     <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
     </>
   )
 }
