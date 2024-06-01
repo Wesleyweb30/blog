@@ -3,6 +3,7 @@ import HomePage from "./page/home";
 import AboutPage from "./page/about";
 import {
   QueryClient,QueryClientProvider} from '@tanstack/react-query'
+import Layout from "./components/layout";
 
 
 /**Rotas 
@@ -12,12 +13,19 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage/>,
+    element: <Layout/>,
+    children: [
+      {
+        path: "/",
+        element: <HomePage/>
+      },
+      {
+        path: "about",
+        element: <AboutPage/>
+      },
+    ]
   },
-  {
-    path: "about",
-    element: <AboutPage/>
-  },
+  
 ]);
 
 
