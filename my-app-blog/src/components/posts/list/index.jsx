@@ -26,7 +26,7 @@ export default function PostsList() {
     console.log(data)
     if (isIdle || isLoading) return 'Loading...';
     if (isError) return 'An error has occurred: ' + error.message;
-    const totalPages = Math.ceil(110 / POSTS_PAGE);  
+    const totalPages = Math.ceil(100 / POSTS_PAGE);  
 
     return (
         <>
