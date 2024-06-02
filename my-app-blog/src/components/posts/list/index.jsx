@@ -3,7 +3,7 @@ import { Col, Pagination, Row } from "react-bootstrap";
 import PostCard from "../card";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios"
-import PostForm from "../form";
+import PostForm from "../form/save";
 
 
 export default function PostsList() {
@@ -12,7 +12,7 @@ export default function PostsList() {
     const [currentPage, setCurrentPage] = useState(1);
 
 
-    const { isIdle, isLoading, isError, data, error } = useQuery({
+    const {data, isIdle, isLoading, isError, error } = useQuery({
         queryKey: ['postsData', currentPage],
         queryFn: () =>
             axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -35,13 +35,15 @@ export default function PostsList() {
                     <PostForm/>
                 </Col>
             </Row>
+
             <Row xs={1} md={2} lg={3} xl={3} xxl={3}>
                 {data.map(post => (
                     <Col key={post.id}>
-                        <PostCard title={post.title} user={post.UserId} body={post.body} />
+                        <PostCard postId={post.id} user={post.UserId} title={post.title} body={post.body}/>
                     </Col>
                 ))}
             </Row>
+            
             <Row>
                 <Pagination className="d-flex justify-content-center">
                     <Pagination.Prev onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} />
