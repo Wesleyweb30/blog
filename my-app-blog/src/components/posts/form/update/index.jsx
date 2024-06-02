@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-// Validação com Yup
+// Validation Yup
 const schema = yup.object().shape({
     title: yup.string().required("Title is required"),
     body: yup.string().required("Body is required"),
@@ -32,14 +32,14 @@ function PostFormUpdate({pId, pTitle, pBody}) {
     
     /**Hooks Mutation */
     const mutation = useMutation({
-        mutationFn: (data) =>{
-            axios.put(`https://jsonplaceholder.typicode.com/posts/${pId}`, {
+        mutationFn: (data) => {
+            axios.put(`https://jsonplaceholder.typicode.com/posts/${pId}`,
+            {
                 title : data.title,
                 body: data.body,
                 userId: 1
-            })
-        }
-    })
+            })}
+        });
    
     const onSubmit = data => {
        mutation.mutate(data, {
